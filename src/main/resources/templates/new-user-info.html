@@ -24,8 +24,8 @@
     <br>
     <label>Enter role:
         <select size="2" multiple name="roles" >
-            <option value="1">ADMIN</option>
-            <option selected="selected" value="2">USER</option>
+            <option value="1">USER</option>
+            <option selected="selected" value="2">ADMIN</option>
         </select>
     </label>
     <br>
@@ -33,9 +33,9 @@
     <label for = "password"> Enter password:</label>
     <input type = "text" th:field = "*{password}" id = "password"/>
     <br>
+    <input type = "submit" value = "OK"/>
 </form>
 <br>
-<input type = "submit" value = "OK"/>
 <input align="right" type = "button" value = "logout"
        onclick = "window.location.href = '/logout'"/>
 

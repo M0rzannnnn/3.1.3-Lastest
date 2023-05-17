@@ -32,7 +32,9 @@ public class AdminController {
     }
 
     @GetMapping(value = "/")
-    public String printUsers (ModelMap model) {
+    public String printUsers (ModelMap model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
         List<User> listOfUsers = userService.getAll();
         model.addAttribute("listOfUsers", listOfUsers);
         return "Users";

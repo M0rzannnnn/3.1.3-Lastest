@@ -57,13 +57,17 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Transactional
     public void update (User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (!user.getPassword().equals(show(user.getId()).getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
     }
 
     @Transactional
     public void delete (Long id) {
-        userRepository.delete(userRepository.findById(id).get());
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
+        }
     }
 
     @Transactional
@@ -73,8 +77,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Transactional
     public User show (Long id) {
-        return userRepository.findById(id).get();
+       User user = userRepository.findById(id).get();
+       return user;
     }
-
-
 }
